@@ -2,8 +2,13 @@ package com.zhangxin.controller;
 
 
 import com.zhangxin.service.BaseDictDaoService;
+import com.zhangxin.service.CustomerService;
+import com.zhangxin.utils.Page;
 import com.zhangxin.vo.BaseDict;
+import com.zhangxin.vo.Customer;
+import com.zhangxin.vo.QueryVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,19 +26,38 @@ public class CustomerController {
 
     @Autowired
     private BaseDictDaoService baseDictService;
+    @Autowired
+    private CustomerService customerService;
+
+    //注解在成员变量上
+    @Value("${fromType.code}")
+    private String fromTypeCode;
+
+    @Value("${industryType.code}")
+    private String industryTypeCode;
+
+    @Value("${levelType.code}")
+    private String levelTypeCode;
 
     //入口
     @RequestMapping(value = "/customer/list")
-    public String list(Model model) {
+    public String list(QueryVo vo, Model model) {
 
-        List<BaseDict> fromType = baseDictService.selectBaseDictListByCode("002");
-        List<BaseDict> industryType = baseDictService.selectBaseDictListByCode("001");
-        List<BaseDict> levelType = baseDictService.selectBaseDictListByCode("006");
+        List<BaseDict> fromType = baseDictService.selectBaseDictListByCode(fromTypeCode);
+        List<BaseDict> industryType = baseDictService.selectBaseDictListByCode(industryTypeCode);
+        List<BaseDict> levelType = baseDictService.selectBaseDictListByCode(levelTypeCode);
 
         model.addAttribute("fromType", fromType);
         model.addAttribute("industryType", industryType);
         model.addAttribute("levelType", levelType);
 
+        //通过四个条件查询分页对象
+        Page<Customer> page = customerService.selectPageByQueryVo(vo);
+        model.addAttribute("page", page);
+        model.addAttribute("custName", vo.getCustName());
+        model.addAttribute("custSource", vo.getCustSource());
+        model.addAttribute("custIndustry", vo.getCustIndustry());
+        model.addAttribute("custLevel", vo.getCustLevel());
         return "customer";
     }
 }
