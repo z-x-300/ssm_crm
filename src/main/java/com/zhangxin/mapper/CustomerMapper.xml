@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhangxin.dao.CustomerDao">
-     <!--查询-->
+     <!--查询总条数-->
     <select id="customerCount" parameterType="QueryVo" resultType="Integer">
         select count(1) from customer
     <where>
@@ -21,7 +21,7 @@
         </if>
     </where>
     </select>
-
+    <!--查询结果集-->
     <select id="selectCustomerListByQueryVo" parameterType="QueryVo" resultType="Customer">
         select * from customer
         <where>
@@ -41,6 +41,7 @@
         limit #{startRow},#{size}
     </select>
 
+    <!--通过ID查询客户信息-->
     <select id="selectCustomerById" parameterType="Integer" resultType="Customer">
         select * from customer
         <where>
@@ -48,6 +49,7 @@
         </where>
     </select>
 
+    <!--更新客户信息-->
     <update id="updateCustomer" parameterType="Customer" >
        update customer
        <set>
@@ -83,4 +85,9 @@
            cust_id =#{cust_id}
        </where>
     </update>
+
+    <!--删除客户信息-->
+    <delete id="deleteCustomerById" parameterType="Integer" >
+       delete from customer where cust_id =#{value}
+    </delete>
 </mapper>

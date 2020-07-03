@@ -80,4 +80,13 @@ public class CustomerController {
         return "OK";
 
     }
+
+    //删除
+    @RequestMapping(value="/customer/delete.action")
+    @ResponseBody
+    public String delete(Integer id){
+        customerService.deleteCustomerById(id);
+        return "OK";
+
+    }
 }

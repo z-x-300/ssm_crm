@@ -54,4 +54,9 @@ public class CustomerService {
         customerDao.updateCustomer(customer);
     }
 
+    //通过ID删除客户信息
+    public void deleteCustomerById(Integer id){
+        customerDao.deleteCustomerById(id);
+    }
+
 }
