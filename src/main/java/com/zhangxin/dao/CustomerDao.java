@@ -10,4 +10,6 @@ public interface CustomerDao {
     public Integer customerCount(QueryVo vo);
     //结果集
     public List<Customer> selectCustomerListByQueryVo(QueryVo vo);
+    //通过ID查询客户
+    public Customer selectCustomerById(Integer id);
 }

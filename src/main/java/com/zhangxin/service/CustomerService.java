@@ -43,4 +43,8 @@ public class CustomerService {
 
         return customerPage;
     }
+
+    public Customer selectCustomerById(Integer id){
+        return customerDao.selectCustomerById(id);
+    }
 }
