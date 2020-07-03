@@ -12,4 +12,6 @@ public interface CustomerDao {
     public List<Customer> selectCustomerListByQueryVo(QueryVo vo);
     //通过ID查询客户
     public Customer selectCustomerById(Integer id);
+    //修改客户信息
+    public void updateCustomer(Customer customer);
 }

@@ -44,7 +44,14 @@ public class CustomerService {
         return customerPage;
     }
 
+    //通过ID查询客户
     public Customer selectCustomerById(Integer id){
         return customerDao.selectCustomerById(id);
     }
+
+    //修改客户信息
+    public void updateCustomer(Customer customer){
+        customerDao.updateCustomer(customer);
+    }
+
 }

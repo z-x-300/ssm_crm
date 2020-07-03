@@ -68,8 +68,16 @@ public class CustomerController {
     public Customer edit(Integer id){
         Customer customer =new Customer();
         customer =customerService.selectCustomerById(id);
-
         return customer;
+
+    }
+
+    //修改
+    @RequestMapping(value="/customer/update.action")
+    @ResponseBody
+    public String update(Customer customer){
+        customerService.updateCustomer(customer);
+        return "OK";
 
     }
 }
